@@ -26,7 +26,9 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import re
+import threading
 import time
 import uuid
 from contextlib import asynccontextmanager
@@ -68,6 +70,7 @@ from .runner import (
     run_turn_streaming,
 )
 from .lab import router as lab_router
+from .lab import warm as warm_lab
 from .session_store import SessionStore, get_session_store
 
 log = get_logger(__name__)
@@ -108,6 +111,10 @@ async def lifespan(app: FastAPI):
         model=get_settings().chat_model,
         region=get_settings().deployment_region,
     )
+    if os.environ.get("LAB_WARM", "1") != "0":
+        # Load the heavy libraries and train the lab's small models now, so the
+        # first person to open a demo is not the one who waits for them.
+        threading.Thread(target=warm_lab, daemon=True).start()
     yield
     log.info("maple.stop")
 

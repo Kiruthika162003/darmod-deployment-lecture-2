@@ -149,8 +149,8 @@ draws what comes back, one demo at a time, with the steps in order.
   // 3. Model decay ------------------------------------------------------------
   function decay(body) {
     const weeks = h("div", { class: "weeks" });
-    const light = h("span", { class: "light green" }, "Healthy");
-    const note = h("div", { class: "muted" }, "Week 0: just trained");
+    const light = h("span", { class: "light" }, "Getting ready…");
+    const note = h("div", { class: "muted" }, "Training the first model");
     const next = h("button", { class: "btn" }, "Next week");
     const retrain = h("button", { class: "btn ghost" }, "Retrain on this week");
     const reset = h("button", { class: "btn ghost", style: "margin-left:auto" }, "Reset");

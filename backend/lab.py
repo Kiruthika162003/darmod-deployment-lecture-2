@@ -36,6 +36,15 @@ def _fake() -> bool:
     return os.environ.get("LAB_FAKE") == "1" or get_settings().chat_model.startswith("fake")
 
 
+def warm() -> None:
+    """Load the heavy libraries and train the small models ahead of the first visitor."""
+    try:
+        _decay()
+        _quant_state()
+    except Exception:  # noqa: BLE001  (a failed warm-up only means the first visit is slower)
+        pass
+
+
 @router.get("/whoami")
 def whoami() -> dict:
     return {"copy": INSTANCE_ID, "revision": REVISION, "fake": _fake()}

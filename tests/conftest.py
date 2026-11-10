@@ -22,6 +22,7 @@ os.environ.setdefault("ENVIRONMENT", "dev")
 os.environ.setdefault("LOG_LEVEL", "WARNING")
 os.environ.setdefault("REQUIRE_API_KEY", "FALSE")
 os.environ.setdefault("SESSION_SECRET", "test-secret-only")
+os.environ.setdefault("LAB_WARM", "0")  # the lab tests train what they need
 
 
 @pytest.fixture(autouse=True)
