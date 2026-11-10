@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture 2 lab - Keeping it alive</title>
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/lab.css">
+</head>
+<body class="lab">
+
+<header class="topbar">
+  <div class="brand">
+    <img class="maple-face" src="/static/assets/maple-awake-mouth-closed.svg" alt="">
+    <span class="brand-text">
+      Lecture 2 lab
+      <span class="brand-sub">Keeping an AI app alive</span>
+    </span>
+  </div>
+  <div class="topbar-right">
+    <span class="copy-chip" id="copyChip" title="Which copy of the app you are talking to">copy</span>
+    <a class="back-link" href="/">&larr; Maple</a>
+  </div>
+</header>
+
+<main class="lab-main">
+  <nav class="rail" id="rail" aria-label="Demos"></nav>
+  <section class="stage" id="stage" aria-live="polite"></section>
+</main>
+
+<script src="/static/lab.js"></script>
+</body>
+</html>

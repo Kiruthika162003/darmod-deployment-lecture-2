@@ -476,3 +476,6 @@ body {
 .steps li { margin: 3px 0; }
 .step-ms { margin-left: 8px; font-family: var(--mono); font-weight: 700; color: var(--pink-deep); }
 .step-detail { font-family: var(--mono); font-size: 10px; color: var(--mid); word-break: break-word; }
+
+.lab-link { font-size: 13px; font-weight: 600; color: var(--pink-deep); text-decoration: none; }
+.lab-link:hover { text-decoration: underline; }
