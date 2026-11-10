@@ -1,0 +1,51 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Maple, awake, mouth open (speaking)">
+  <defs>
+    <radialGradient id="bodyGrad" cx="40%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#ff5ab3"/>
+      <stop offset="60%" stop-color="#E90F8C"/>
+      <stop offset="100%" stop-color="#a30662"/>
+    </radialGradient>
+    <radialGradient id="cheekGrad" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ff85c8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff85c8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="120" cy="222" rx="78" ry="8" fill="#000" opacity="0.10"/>
+  <ellipse cx="60" cy="195" rx="34" ry="13" fill="#7c5638"/>
+  <path d="M40 188 Q50 184 60 188 M40 198 Q50 202 60 198 M50 184 L50 208 M70 184 L70 208"
+        stroke="#5e4128" stroke-width="1.2" fill="none" opacity="0.6"/>
+  <ellipse cx="120" cy="160" rx="62" ry="55" fill="url(#bodyGrad)"/>
+  <ellipse cx="120" cy="180" rx="36" ry="28" fill="#ffd9ec" opacity="0.55"/>
+  <path d="M70 115 Q120 102 170 115 L168 130 Q120 116 72 130 Z" fill="#a30662"/>
+  <path d="M155 122 L182 155 L172 158 L150 130 Z" fill="#E90F8C"/>
+  <circle cx="178" cy="158" r="3" fill="#FAAD1A"/>
+  <!-- Arms a touch raised (engaged) -->
+  <ellipse cx="64" cy="160" rx="10" ry="9" fill="#6f4628"/>
+  <ellipse cx="176" cy="160" rx="10" ry="9" fill="#6f4628"/>
+  <ellipse cx="92" cy="215" rx="14" ry="7" fill="#6f4628"/>
+  <ellipse cx="148" cy="215" rx="14" ry="7" fill="#6f4628"/>
+  <circle cx="120" cy="85" r="48" fill="url(#bodyGrad)"/>
+  <circle cx="88" cy="50" r="10" fill="#a30662"/>
+  <circle cx="88" cy="50" r="5" fill="#ff85c8"/>
+  <circle cx="152" cy="50" r="10" fill="#a30662"/>
+  <circle cx="152" cy="50" r="5" fill="#ff85c8"/>
+  <ellipse cx="85" cy="103" rx="11" ry="7" fill="url(#cheekGrad)"/>
+  <ellipse cx="155" cy="103" rx="11" ry="7" fill="url(#cheekGrad)"/>
+  <!-- Eyebrows up (excited / explaining) -->
+  <path d="M88 58 Q102 50 116 58" stroke="#3a1530" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M124 58 Q138 50 152 58" stroke="#3a1530" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="102" cy="80" r="16" fill="#ffffff" stroke="#222" stroke-width="2.4"/>
+  <circle cx="138" cy="80" r="16" fill="#ffffff" stroke="#222" stroke-width="2.4"/>
+  <line x1="118" y1="80" x2="122" y2="80" stroke="#222" stroke-width="2.4"/>
+  <circle class="maple-eye" cx="102" cy="80" r="4.5" fill="#111"/>
+  <circle class="maple-eye" cx="138" cy="80" r="4.5" fill="#111"/>
+  <circle cx="104" cy="78" r="1.4" fill="#fff"/>
+  <circle cx="140" cy="78" r="1.4" fill="#fff"/>
+  <ellipse cx="120" cy="100" rx="6" ry="4.5" fill="#222"/>
+  <!-- Mouth open (talking pose) -->
+  <ellipse cx="120" cy="120" rx="12" ry="8" fill="#5b1a1a"/>
+  <rect x="114.5" y="115" width="4.5" height="6" fill="#fff" stroke="#222" stroke-width="0.6"/>
+  <rect x="121" y="115" width="4.5" height="6" fill="#fff" stroke="#222" stroke-width="0.6"/>
+  <ellipse cx="120" cy="124" rx="4" ry="2" fill="#d36e6e"/>
+</svg>

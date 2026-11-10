@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# lecture2 demo output - regenerated on every run, never committed
+lecture2/*.sqlite3
+lecture2/*.jsonl
+lecture2/*.csv
+lecture2/artifacts/
+lecture2/.cache/
+
+# lecture3 demo output - same deal
+lecture3/*.json
+lecture3/*.csv
+lecture3/*.md
+!lecture3/README.md

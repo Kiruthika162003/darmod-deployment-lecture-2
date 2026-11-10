@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maple Admin - Vector Institute</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <span class="brand-text">
+      Maple admin
+      <span class="brand-sub">Vector Institute . order approvals</span>
+    </span>
+  </div>
+  <div class="top-meta">
+    <a href="/" style="color:var(--pink-deep);font-weight:700;text-decoration:none;">&larr; back to chat</a>
+  </div>
+</header>
+
+<main>
+  <div class="admin-shell">
+    <h1 class="admin-title">Order approval queue</h1>
+    <p class="admin-sub">
+      Enter the admin password to load the queue. Approving an order
+      ships it; denying sends Maple back to the customer to ask what
+      to change.
+    </p>
+
+    <div class="admin-gate">
+      <input type="password" id="pw" placeholder="admin password" autocomplete="off">
+      <button id="unlock">Unlock</button>
+    </div>
+    <div class="admin-status" id="status">Not unlocked yet.</div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-status="pending">Pending</button>
+      <button class="admin-tab" data-status="approved">Approved</button>
+      <button class="admin-tab" data-status="denied">Denied</button>
+    </div>
+
+    <div class="admin-list" id="list">
+      <div class="admin-empty">Enter the admin password above.</div>
+    </div>
+  </div>
+</main>
+
+<footer class="footbar">
+  <div>Vector Institute . DARMOD program . admin console</div>
+</footer>
+
+<script src="/static/admin.js"></script>
+</body>
+</html>

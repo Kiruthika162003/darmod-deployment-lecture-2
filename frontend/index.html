@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maple - Vector Institute assistant</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img id="mapleFace" class="maple-face" src="/static/assets/maple-awake-mouth-closed.svg" alt="Maple">
+    <span class="brand-text">
+      Maple
+      <span class="brand-sub">Vector Institute . DARMOD program</span>
+    </span>
+  </div>
+  <div class="topbar-right">
+    <div class="top-meta" id="topMeta">connecting&hellip;</div>
+  </div>
+</header>
+
+<main class="main">
+  <section class="chat-card">
+    <nav class="tabs" role="tablist" aria-label="Reply mode">
+      <button class="tab active" data-tab="online"  role="tab">Online</button>
+      <button class="tab"        data-tab="stream"  role="tab">Streaming</button>
+      <button class="tab"        data-tab="batch"   role="tab">Batch</button>
+      <button class="tab"        data-tab="compare" role="tab">Compare</button>
+      <button class="tab"        data-tab="all"     role="tab">Test Lab</button>
+    </nav>
+    <label class="search-switch" title="Off: Maple answers from memory with no web search. Faster, but she can invent details">
+      <input type="checkbox" id="useSearch" checked>
+      Search the web before answering
+      <span>off is faster, but Maple can get Vector facts wrong</span>
+    </label>
+
+    <!-- Online -->
+    <div class="panel active" id="panel-online">
+      <p class="panel-hint">One question, one full reply. Same session memory as the other tabs.</p>
+      <div class="transcript" data-transcript="online"></div>
+      <div class="composer">
+        <input type="text" class="input" data-input="online" placeholder="What is the DARMOD program at Vector Institute?" autocomplete="off">
+        <button class="send" data-send="online">Ask</button>
+      </div>
+      <div class="meter" data-meter="online">&nbsp;</div>
+    </div>
+
+    <!-- Streaming -->
+    <div class="panel" id="panel-stream">
+      <p class="panel-hint">Tokens arrive live from Gemini. First-token latency is measured.</p>
+      <div class="transcript" data-transcript="stream"></div>
+      <div class="composer">
+        <input type="text" class="input" data-input="stream" placeholder="Tell me a short story about Toronto AI." autocomplete="off">
+        <button class="send" data-send="stream">Stream</button>
+      </div>
+      <div class="meter" data-meter="stream">&nbsp;</div>
+    </div>
+
+    <!-- Batch -->
+    <div class="panel" id="panel-batch">
+      <p class="panel-hint">Many prompts, one request, many replies. Nobody waits at the screen; the results land together. One prompt per line (up to 25), Ctrl+Enter to run.</p>
+      <div class="transcript" data-transcript="batch"></div>
+      <div class="composer batch-composer">
+        <textarea class="input" data-input="batch" rows="4" spellcheck="false">What is the DARMOD program?
+What is FastLane?
+Where is Vector Institute headquartered?</textarea>
+        <button class="send" data-send="batch">Run batch</button>
+      </div>
+      <div class="meter" data-meter="batch">&nbsp;</div>
+    </div>
+
+    <!-- Compare -->
+    <div class="panel" id="panel-compare">
+      <p class="panel-hint">The chat model against the bigger Pro model on the same prompt. Watch the thinking tokens: that is where the time and the money go.</p>
+      <div class="transcript" data-transcript="compare"></div>
+      <div class="composer">
+        <input type="text" class="input" data-input="compare" placeholder="What is the Pan-Canadian AI Strategy?" autocomplete="off">
+        <button class="send" data-send="compare">Ask both</button>
+      </div>
+      <div class="meter" data-meter="compare">&nbsp;</div>
+    </div>
+
+    <!-- All -->
+    <div class="panel" id="panel-all">
+      <p class="panel-hint">One prompt, all three modes at once: online, streaming and batch, side by side.</p>
+      <div class="transcript" data-transcript="all"></div>
+      <div class="composer">
+        <input type="text" class="input" data-input="all" placeholder="Ask once, see every mode answer." autocomplete="off">
+        <button class="send" data-send="all">Ask all</button>
+      </div>
+      <div class="meter" data-meter="all">&nbsp;</div>
+    </div>
+  </section>
+
+  <aside class="store-card">
+    <div class="store-head">
+      <div class="store-title">Vector Store</div>
+      <div class="store-hint">Click an item to add. Fill name + email. Press Place order.</div>
+    </div>
+    <div class="catalog" id="catalog">loading catalog&hellip;</div>
+
+    <div class="cart-block">
+      <div class="cart-head">Your cart</div>
+      <div class="cart" id="cart"><div class="empty">Cart is empty.</div></div>
+      <div class="cart-form">
+        <input type="text"  id="cartName"  placeholder="your name" autocomplete="off">
+        <input type="email" id="cartEmail" placeholder="email@vectorinstitute.ai" autocomplete="off">
+        <button id="cartSubmit" disabled>Place order</button>
+      </div>
+      <div class="cart-meter" id="cartMeter">&nbsp;</div>
+    </div>
+
+    <div class="my-orders" id="myOrders"></div>
+
+    <div class="store-foot">
+      <a href="/admin" target="_blank" rel="noopener">Open admin page &rarr;</a>
+      <span>password is <code>1234</code></span>
+    </div>
+  </aside>
+</main>
+
+<footer class="footbar">
+  <div id="footRegion">region: local</div><span class="dot"></span>
+  <div id="footModel">model: gemini-2.5-flash</div><span class="dot"></span>
+  <div>Vector Institute . DARMOD program . Model Deployment lecture</div>
+</footer>
+
+<div class="modal" id="orderModal" hidden role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+  <div class="modal-card">
+    <span class="modal-badge" id="orderModalBadge">PENDING</span>
+    <h2 id="orderModalTitle">Waiting for a Vector admin</h2>
+    <p id="orderModalBody"></p>
+    <div class="modal-actions">
+      <a href="/admin" target="_blank" rel="noopener">Open admin page &rarr;</a>
+      <button type="button" id="orderModalHide">Hide</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
