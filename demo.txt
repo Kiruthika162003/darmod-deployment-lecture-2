@@ -1,0 +1,16 @@
+cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
+.\.venv\Scripts\Activate.ps1
+uvicorn backend.main:app --port 8080
+
+cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
+.\.venv\Scripts\Activate.ps1
+pytest -q
+
+cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
+gcloud run deploy maple --source . --project devfest-demos-472013 --region northamerica-northeast2 --allow-unauthenticated --memory 1Gi --cpu 1 --concurrency 8 --min-instances 1 --max-instances 10 --timeout 300 --set-env-vars "ENVIRONMENT=prod,LOG_LEVEL=INFO,DEPLOYMENT_REGION=northamerica-northeast2,REQUIRE_API_KEY=FALSE,GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_PROJECT=devfest-demos-472013,GOOGLE_CLOUD_LOCATION=global" --quiet
+gcloud run services update-traffic maple --to-latest --project devfest-demos-472013 --region northamerica-northeast2
+
+gcloud run revisions list --service maple --region northamerica-northeast2 --project devfest-demos-472013
+gcloud run services update-traffic maple --to-revisions maple-00001-jwc=100 --project devfest-demos-472013 --region northamerica-northeast2
+
+gcloud run services update-traffic maple --to-latest --project devfest-demos-472013 --region northamerica-northeast2

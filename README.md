@@ -9,6 +9,8 @@ which sits in a pending queue until an admin approves it.
 
 The code is small on purpose. Every file is short enough to actually read.
 
+**Lecture 2 (keeping it alive):** open `/lab` and read [LECTURE2.md](LECTURE2.md).
+
 **New here? Start with [COOKBOOK.md](COOKBOOK.md)** — it walks through
 running this locally with a free API key, understanding what each part
 does, and deploying it to Google Cloud Run, including the two things that

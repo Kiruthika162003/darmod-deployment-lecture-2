@@ -1,0 +1,2 @@
+gcloud run services delete maple --region northamerica-northeast2 --project devfest-demos-472013 --quiet
+gcloud artifacts repositories delete cloud-run-source-deploy --location northamerica-northeast2 --project devfest-demos-472013 --quiet
