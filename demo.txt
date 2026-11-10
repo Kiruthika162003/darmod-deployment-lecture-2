@@ -1,16 +1,117 @@
+HOW TO RUN THE LECTURE 2 DEMO
+=============================
+
+How to use this file
+  - Open one terminal per numbered section (the + button in the terminal panel).
+  - Copy the whole section and paste it. Every section starts with its own "cd",
+    so it does not matter which folder the terminal was in.
+  - Lines starting with # are comments. They are safe to paste.
+  - The terminals are PowerShell. The prompt shows (.venv) once the environment is on.
+
+The two folders
+  Code:        C:\Users\Admin\Desktop\darmod-deployment-lecture-2
+  Offline run: C:\Users\Admin\Desktop\darmod-demo-run-lecture-2
+
+The lab page has ten demos. Use the arrow keys to move between them.
+
+
+======================================================================
+1. START THE LAB   (Terminal 1, leave it running the whole lecture)
+======================================================================
+# WHEN: first thing, a few minutes before you start.
+# WHAT IT DOES: runs the app on your laptop with the real Gemini through your Google login.
+# THEN: open http://localhost:8080/lab in the browser. Ask one question in the cache
+#       demo before the audience arrives, so the first real one is not the slow one.
+# STOP IT: press Ctrl+C in this terminal.
+
 cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
 .\.venv\Scripts\Activate.ps1
 uvicorn backend.main:app --port 8080
+
+
+======================================================================
+2. OFFLINE REHEARSAL   (use this INSTEAD of section 1, never both)
+======================================================================
+# WHEN: practising without internet, or if the Google login is not working.
+# WHAT IT DOES: the same lab with scripted answers for the cache demo. Needs no login.
+# WHY NOT BOTH: both use port 8080. Stop one before starting the other (Ctrl+C).
+# THEN: open http://localhost:8080/lab. The page works the same.
+
+cd C:\Users\Admin\Desktop\darmod-demo-run-lecture-2
+& "C:\Users\Admin\Desktop\darmod-deployment-lecture-2\.venv\Scripts\python.exe" offline_server.py
+
+
+======================================================================
+3. RUN THE TESTS   (Terminal 2, takes about half a minute)
+======================================================================
+# WHEN: before the lecture, or after you change anything in the code.
+# WHAT IT DOES: runs all 43 tests. They use scripted answers and make no Google calls.
+# GOOD RESULT: a line ending in "43 passed".
 
 cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
 .\.venv\Scripts\Activate.ps1
 pytest -q
 
+
+======================================================================
+4. THE LIVE CLOUD RUN LINK   (no terminal needed)
+======================================================================
+# WHEN: for demo 6, "Copies appear when busy". On your laptop there is only one copy,
+#       so Cloud Run is the only place the copies really start.
+# OPEN IN THE BROWSER:
+#   https://maple-108279147534.northamerica-northeast2.run.app/lab
+# TIP: after the lecture the extra copies shut down by themselves in about 15 minutes.
+
+
+======================================================================
+5. DEPLOY A NEW VERSION   (Terminal 2, takes about 5 minutes)
+======================================================================
+# WHEN: ONLY if you changed the code and want the live link to have the change.
+#       If you did not change anything, skip this section.
+# WHAT IT DOES: builds the app in Google Cloud and sends all traffic to the new version.
+# DO NOT RUN IT during the lecture. The build takes minutes.
+
 cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
 gcloud run deploy maple --source . --project devfest-demos-472013 --region northamerica-northeast2 --allow-unauthenticated --memory 1Gi --cpu 1 --concurrency 8 --min-instances 1 --max-instances 10 --timeout 300 --set-env-vars "ENVIRONMENT=prod,LOG_LEVEL=INFO,DEPLOYMENT_REGION=northamerica-northeast2,REQUIRE_API_KEY=FALSE,GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_PROJECT=devfest-demos-472013,GOOGLE_CLOUD_LOCATION=global" --quiet
 gcloud run services update-traffic maple --to-latest --project devfest-demos-472013 --region northamerica-northeast2
 
+
+======================================================================
+6. SEE THE VERSIONS AND GO BACK   (Terminal 2, the rollback moment)
+======================================================================
+# WHEN: if you want to show "undo a bad release in seconds".
+# WHAT IT DOES: lists every version, then sends all traffic back to the lecture 1 version.
+# AFTER THIS the live link shows Maple from lecture 1 (no /lab page). Do section 7 to undo it.
+
+cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
 gcloud run revisions list --service maple --region northamerica-northeast2 --project devfest-demos-472013
 gcloud run services update-traffic maple --to-revisions maple-00001-jwc=100 --project devfest-demos-472013 --region northamerica-northeast2
 
+
+======================================================================
+7. GO FORWARD AGAIN   (Terminal 2, right after section 6)
+======================================================================
+# WHEN: straight after the rollback demo, so the live link has the lab again.
+# WHAT IT DOES: sends all traffic back to the newest version.
+
+cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
 gcloud run services update-traffic maple --to-latest --project devfest-demos-472013 --region northamerica-northeast2
+
+
+======================================================================
+IF SOMETHING GOES WRONG
+======================================================================
+# "address already in use" when starting: another copy is running. Close its terminal
+#   (Ctrl+C), or see what is holding the port:
+Get-NetTCPConnection -LocalPort 8080 -State Listen
+
+# The prompt does not start with (.venv): turn the environment on again.
+cd C:\Users\Admin\Desktop\darmod-deployment-lecture-2
+.\.venv\Scripts\Activate.ps1
+
+# Gemini answers fail with a login error (cache demo only): log in again, then restart section 1.
+gcloud auth application-default login
+
+# WHEN THE LECTURE IS OVER: the live service keeps one copy running and costs a little.
+#   The commands to shut it down are in shutdown.txt, in this same folder.
+#   They are kept apart on purpose, so pasting this file can never delete anything.
