@@ -67,6 +67,7 @@ from .runner import (
     run_turn,
     run_turn_streaming,
 )
+from .lab import router as lab_router
 from .session_store import SessionStore, get_session_store
 
 log = get_logger(__name__)
@@ -620,6 +621,8 @@ async def admin_deny(order_id: str, token: str | None = None, reason: str | None
 
 # --- Static frontend ------------------------------------------------------
 
+app.include_router(lab_router)
+
 _FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 
 if _FRONTEND_DIR.exists():
@@ -631,6 +634,11 @@ if _FRONTEND_DIR.exists():
         if not index_path.exists():
             return {"message": "Frontend not built yet."}
         return FileResponse(str(index_path))
+
+    @app.get("/lab")
+    async def lab_page():
+        """Lecture 2 lab: live demos of what keeps an AI app alive in production."""
+        return FileResponse(str(_FRONTEND_DIR / "lab.html"))
 
     @app.get("/admin")
     async def admin_page():
